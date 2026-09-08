@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>批量条码生成系统</title>
+    <script src="https://aisearch-task.bj.bcebos.com/static/tailwindcss-3.4.17.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/jsbarcode@3.11.6/dist/JsBarcode.all.min.js'"></script>
+    <!-- 内联二维码库（qrcode-generator v1.4.4 by Kazuhiko Arase），无需联网 -->
+    <script>
+var qrcode=function(){function i(t,r){function a(t,r){g=function(t){for(var r=new Array(t),e=0;e<t;e+=1){r[e]=new Array(t);for(var n=0;n<t;n+=1)r[e][n]=null}return r}(l=4*u+17),e(0,0),e(l-7,0),e(0,l-7),i(),o(),v(t,r),7<=u&&h(t),null==n&&(n=w(u,f,c)),d(n,r)}var u=t,f=y[r],g=null,l=0,n=null,c=[],s={},e=function(t,r){for(var e=-1;e<=7;e+=1)if(!(t+e<=-1||l<=t+e))for(var n=-1;n<=7;n+=1)r+n<=-1||l<=r+n||(g[t+e][r+n]=0<=e&&e<=6&&(0==n||6==n)||0<=n&&n<=6&&(0==e||6==e)||2<=e&&e<=4&&2<=n&&n<=4)},o=function(){for(var t=8;t<l-8;t+=1)null==g[t][6]&&(g[t][6]=t%2==0);for(var r=8;r<l-8;r+=1)null==g[6][r]&&(g[6][r]=r%2==0)},i=function(){for(var t=B.getPatternPosition(u),r=0;r<t.length;r+=1)for(var e=0;e<t.length;e+=1){var n=t[r],o=t[e];if(null==g[n][o])for(var i=-2;i<=2;i+=1)for(var a=-2;a<=2;a+=1)g[n+i][o+a]=-2==i||2==i||-2==a||2==a||0==i&&0==a}},h=function(t){for(var r=B.getBCHTypeNumber(u),e=0;e<18;e+=1){var n=!t&&1==(r>>e&1);g[Math.floor(e/3)][e%3+l-8-3]=n}for(e=0;e<18;e+=1){n=!t&&1==(r>>e&1);g[e%3+l-8-3][Math.floor(e/3)]=n}},v=function(t,r){for(var e=f<<3|r,n=B.getBCHTypeInfo(e),o=0;o<15;o+=1){var i=!t&&1==(n>>o&1);o<6?g[o][8]=i:o<8?g[o+1][8]=i:g[l-15+o][8]=i}for(o=0;o<15;o+=1){i=!t&&1==(n>>o&1);o<8?g[8][l-o-1]=i:o<9?g[8][15-o-1+1]=i:g[8][15-o-1]=i}g[l-8][8]=!t},d=function(t,r){for(var e=-1,n=l-1,o=7,i=0,a=B.getMaskFunction(r),u=l-1;0<u;u-=2)for(6==u&&(u-=1);;){for(var f=0;f<2;f+=1)if(null==g[n][u-f]){var c=!1;i<t.length&&(c=1==(t[i]>>>o&1)),a(n,u-f)&&(c=!c),g[n][u-f]=c,-1==(o-=1)&&(i+=1,o=7)}if((n+=e)<0||l<=n){n-=e,e=-e;break}}},w=function(t,r,e){for(var n=b.getRSBlocks(t,r),o=M(),i=0;i<e.length;i+=1){var a=e[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var u=0;for(i=0;i<n.length;i+=1)u+=n[i].dataCount;if(o.getLengthInBits()>8*u)throw"code length overflow. ("+o.getLengthInBits()+">"+8*u+")";for(o.getLengthInBits()+4<=8*u&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*u||(o.put(236,8),o.getLengthInBits()>=8*u));)o.put(17,8);return function(t,r){for(var e=0,n=0,o=0,i=new Array(r.length),a=new Array(r.length),u=0;u<r.length;u+=1){var f=r[u].dataCount,c=r[u].totalCount-f;n=Math.max(n,f),o=Math.max(o,c),i[u]=new Array(f);for(var g=0;g<i[u].length;g+=1)i[u][g]=255&t.getBuffer()[g+e];e+=f;var l=B.getErrorCorrectPolynomial(c),h=C(i[u],l.getLength()-1).mod(l);a[u]=new Array(l.getLength()-1);for(g=0;g<a[u].length;g+=1){var s=g+h.getLength()-a[u].length;a[u][g]=0<=s?h.getAt(s):0}}var v=0;for(g=0;g<r.length;g+=1)v+=r[g].totalCount;var d=new Array(v),w=0;for(g=0;g<n;g+=1)for(u=0;u<r.length;u+=1)g<i[u].length&&(d[w]=i[u][g],w+=1);for(g=0;g<o;g+=1)for(u=0;u<r.length;u+=1)g<a[u].length&&(d[w]=a[u][g],w+=1);return d}(o,n)};s.addData=function(t,r){var e=null;switch(r=r||"Byte"){case"Numeric":e=x(t);break;case"Alphanumeric":e=m(t);break;case"Byte":e=L(t);break;case"Kanji":e=D(t);break;default:throw"mode:"+r}c.push(e),n=null},s.isDark=function(t,r){if(t<0||l<=t||r<0||l<=r)throw t+","+r;return g[t][r]},s.getModuleCount=function(){return l},s.make=function(){if(u<1){for(var t=1;t<40;t++){for(var r=b.getRSBlocks(t,f),e=M(),n=0;n<c.length;n++){var o=c[n];e.put(o.getMode(),4),e.put(o.getLength(),B.getLengthInBits(o.getMode(),t)),o.write(e)}var i=0;for(n=0;n<r.length;n++)i+=r[n].dataCount;if(e.getLengthInBits()<=8*i)break}u=t}a(!1,function(){for(var t=0,r=0,e=0;e<8;e+=1){a(!0,e);var n=B.getLostPoint(s);(0==e||n<t)&&(t=n,r=e)}return r}())},s.createTableTag=function(t,r){t=t||2;var e="";e+='<table style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: "+(r=void 0===r?4*t:r)+"px;",e+='">',e+="<tbody>";for(var n=0;n<s.getModuleCount();n+=1){e+="<tr>";for(var o=0;o<s.getModuleCount();o+=1)e+='<td style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: 0px;",e+=" width: "+t+"px;",e+=" height: "+t+"px;",e+=" background-color: ",e+=s.isDark(n,o)?"#000000":"#ffffff",e+=";",e+='"/>';e+="</tr>"}return e+="</tbody>",e+="</table>"},s.createSvgTag=function(t,r,e,n){var o={};"object"==typeof t&&(t=(o=t).cellSize,r=o.margin,e=o.alt,n=o.title),t=t||2,r=void 0===r?4*t:r,(e="string"==typeof e?{text:e}:e||{}).text=e.text||null,e.id=e.text?e.id||"qrcode-description":null,(n="string"==typeof n?{text:n}:n||{}).text=n.text||null,n.id=n.text?n.id||"qrcode-title":null;var i,a,u,f,c=s.getModuleCount()*t+2*r,g="";for(f="l"+t+",0 0,"+t+" -"+t+",0 0,-"+t+"z ",g+='<svg version="1.1" xmlns="http://www.w3.org/2000/svg"',g+=o.scalable?"":' width="'+c+'px" height="'+c+'px"',g+=' viewBox="0 0 '+c+" "+c+'" ',g+=' preserveAspectRatio="xMinYMin meet"',g+=n.text||e.text?' role="img" aria-labelledby="'+p([n.id,e.id].join(" ").trim())+'"':"",g+=">",g+=n.text?'<title id="'+p(n.id)+'">'+p(n.text)+"</title>":"",g+=e.text?'<description id="'+p(e.id)+'">'+p(e.text)+"</description>":"",g+='<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>',g+='<path d="',a=0;a<s.getModuleCount();a+=1)for(u=a*t+r,i=0;i<s.getModuleCount();i+=1)s.isDark(a,i)&&(g+="M"+(i*t+r)+","+u+f);return g+='" stroke="transparent" fill="black"/>',g+="</svg>"},s.createDataURL=function(o,t){o=o||2,t=void 0===t?4*o:t;var r=s.getModuleCount()*o+2*t,i=t,a=r-t;return I(r,r,function(t,r){if(i<=t&&t<a&&i<=r&&r<a){var e=Math.floor((t-i)/o),n=Math.floor((r-i)/o);return s.isDark(n,e)?0:1}return 1})},s.createImgTag=function(t,r,e){t=t||2,r=void 0===r?4*t:r;var n=s.getModuleCount()*t+2*r,o="";return o+="<img",o+=' src="',o+=s.createDataURL(t,r),o+='"',o+=' width="',o+=n,o+='"',o+=' height="',o+=n,o+='"',e&&(o+=' alt="',o+=p(e),o+='"'),o+="/>"};var p=function(t){for(var r="",e=0;e<t.length;e+=1){var n=t.charAt(e);switch(n){case"<":r+="&lt;";break;case">":r+="&gt;";break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;default:r+=n}}return r};return s.createASCII=function(t,r){if((t=t||1)<2)return function(t){t=void 0===t?2:t;var r,e,n,o,i,a=1*s.getModuleCount()+2*t,u=t,f=a-t,c={"██":"█","█ ":"▀"," █":"▄","  ":" "},g={"██":"▀","█ ":"▀"," █":" ","  ":" "},l="";for(r=0;r<a;r+=2){for(n=Math.floor((r-u)/1),o=Math.floor((r+1-u)/1),e=0;e<a;e+=1)i="█",u<=e&&e<f&&u<=r&&r<f&&s.isDark(n,Math.floor((e-u)/1))&&(i=" "),u<=e&&e<f&&u<=r+1&&r+1<f&&s.isDark(o,Math.floor((e-u)/1))?i+=" ":i+="█",l+=t<1&&f<=r+1?g[i]:c[i];l+="\n"}return a%2&&0<t?l.substring(0,l.length-a-1)+Array(1+a).join("▀"):l.substring(0,l.length-1)}(r);t-=1,r=void 0===r?2*t:r;var e,n,o,i,a=s.getModuleCount()*t+2*r,u=r,f=a-r,c=Array(t+1).join("██"),g=Array(t+1).join("  "),l="",h="";for(e=0;e<a;e+=1){for(o=Math.floor((e-u)/t),h="",n=0;n<a;n+=1)i=1,u<=n&&n<f&&u<=e&&e<f&&s.isDark(o,Math.floor((n-u)/t))&&(i=0),h+=i?c:g;for(o=0;o<t;o+=1)l+=h+"\n"}return l.substring(0,l.length-1)},s.renderTo2dContext=function(t,r){r=r||2;for(var e=s.getModuleCount(),n=0;n<e;n++)for(var o=0;o<e;o++)t.fillStyle=s.isDark(n,o)?"black":"white",t.fillRect(n*r,o*r,r,r)},s}i.stringToBytes=(i.stringToBytesFuncs={default:function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);r.push(255&n)}return r}}).default,i.createStringToBytes=function(u,f){var i=function(){function t(){var t=r.read();if(-1==t)throw"eof";return t}for(var r=S(u),e=0,n={};;){var o=r.read();if(-1==o)break;var i=t(),a=t()<<8|t();n[String.fromCharCode(o<<8|i)]=a,e+=1}if(e!=f)throw e+" != "+f;return n}(),a="?".charCodeAt(0);return function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);if(n<128)r.push(n);else{var o=i[t.charAt(e)];"number"==typeof o?(255&o)==o?r.push(o):(r.push(o>>>8),r.push(255&o)):r.push(a)}}return r}};var r,t,a=1,u=2,o=4,f=8,y={L:1,M:0,Q:3,H:2},e=0,n=1,c=2,g=3,l=4,h=5,s=6,v=7,B=(r=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],(t={}).getBCHTypeInfo=function(t){for(var r=t<<10;0<=d(r)-d(1335);)r^=1335<<d(r)-d(1335);return 21522^(t<<10|r)},t.getBCHTypeNumber=function(t){for(var r=t<<12;0<=d(r)-d(7973);)r^=7973<<d(r)-d(7973);return t<<12|r},t.getPatternPosition=function(t){return r[t-1]},t.getMaskFunction=function(t){switch(t){case e:return function(t,r){return(t+r)%2==0};case n:return function(t,r){return t%2==0};case c:return function(t,r){return r%3==0};case g:return function(t,r){return(t+r)%3==0};case l:return function(t,r){return(Math.floor(t/2)+Math.floor(r/3))%2==0};case h:return function(t,r){return t*r%2+t*r%3==0};case s:return function(t,r){return(t*r%2+t*r%3)%2==0};case v:return function(t,r){return(t*r%3+(t+r)%2)%2==0};default:throw"bad maskPattern:"+t}},t.getErrorCorrectPolynomial=function(t){for(var r=C([1],0),e=0;e<t;e+=1)r=r.multiply(C([1,w.gexp(e)],0));return r},t.getLengthInBits=function(t,r){if(1<=r&&r<10)switch(t){case a:return 10;case u:return 9;case o:case f:return 8;default:throw"mode:"+t}else if(r<27)switch(t){case a:return 12;case u:return 11;case o:return 16;case f:return 10;default:throw"mode:"+t}else{if(!(r<41))throw"type:"+r;switch(t){case a:return 14;case u:return 13;case o:return 16;case f:return 12;default:throw"mode:"+t}}},t.getLostPoint=function(t){for(var r=t.getModuleCount(),e=0,n=0;n<r;n+=1)for(var o=0;o<r;o+=1){for(var i=0,a=t.isDark(n,o),u=-1;u<=1;u+=1)if(!(n+u<0||r<=n+u))for(var f=-1;f<=1;f+=1)o+f<0||r<=o+f||0==u&&0==f||a==t.isDark(n+u,o+f)&&(i+=1);5<i&&(e+=3+i-5)}for(n=0;n<r-1;n+=1)for(o=0;o<r-1;o+=1){var c=0;t.isDark(n,o)&&(c+=1),t.isDark(n+1,o)&&(c+=1),t.isDark(n,o+1)&&(c+=1),t.isDark(n+1,o+1)&&(c+=1),0!=c&&4!=c||(e+=3)}for(n=0;n<r;n+=1)for(o=0;o<r-6;o+=1)t.isDark(n,o)&&!t.isDark(n,o+1)&&t.isDark(n,o+2)&&t.isDark(n,o+3)&&t.isDark(n,o+4)&&!t.isDark(n,o+5)&&t.isDark(n,o+6)&&(e+=40);for(o=0;o<r;o+=1)for(n=0;n<r-6;n+=1)t.isDark(n,o)&&!t.isDark(n+1,o)&&t.isDark(n+2,o)&&t.isDark(n+3,o)&&t.isDark(n+4,o)&&!t.isDark(n+5,o)&&t.isDark(n+6,o)&&(e+=40);var g=0;for(o=0;o<r;o+=1)for(n=0;n<r;n+=1)t.isDark(n,o)&&(g+=1);return e+=Math.abs(100*g/r/r-50)/5*10},t);function d(t){for(var r=0;0!=t;)r+=1,t>>>=1;return r}var w=function(){for(var r=new Array(256),e=new Array(256),t=0;t<8;t+=1)r[t]=1<<t;for(t=8;t<256;t+=1)r[t]=r[t-4]^r[t-5]^r[t-6]^r[t-8];for(t=0;t<255;t+=1)e[r[t]]=t;var n={glog:function(t){if(t<1)throw"glog("+t+")";return e[t]},gexp:function(t){for(;t<0;)t+=255;for(;256<=t;)t-=255;return r[t]}};return n}();function C(n,o){if(void 0===n.length)throw n.length+"/"+o;var r=function(){for(var t=0;t<n.length&&0==n[t];)t+=1;for(var r=new Array(n.length-t+o),e=0;e<n.length-t;e+=1)r[e]=n[e+t];return r}(),i={getAt:function(t){return r[t]},getLength:function(){return r.length},multiply:function(t){for(var r=new Array(i.getLength()+t.getLength()-1),e=0;e<i.getLength();e+=1)for(var n=0;n<t.getLength();n+=1)r[e+n]^=w.gexp(w.glog(i.getAt(e))+w.glog(t.getAt(n)));return C(r,0)},mod:function(t){if(i.getLength()-t.getLength()<0)return i;for(var r=w.glog(i.getAt(0))-w.glog(t.getAt(0)),e=new Array(i.getLength()),n=0;n<i.getLength();n+=1)e[n]=i.getAt(n);for(n=0;n<t.getLength();n+=1)e[n]^=w.gexp(w.glog(t.getAt(n))+r);return C(e,0).mod(t)}};return i}function p(){var e=[],o={writeByte:function(t){e.push(255&t)},writeShort:function(t){o.writeByte(t),o.writeByte(t>>>8)},writeBytes:function(t,r,e){r=r||0,e=e||t.length;for(var n=0;n<e;n+=1)o.writeByte(t[n+r])},writeString:function(t){for(var r=0;r<t.length;r+=1)o.writeByte(t.charCodeAt(r))},toByteArray:function(){return e},toString:function(){var t="";t+="[";for(var r=0;r<e.length;r+=1)0<r&&(t+=","),t+=e[r];return t+="]"}};return o}var k,A,b=(k=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],(A={}).getRSBlocks=function(t,r){var e=function(t,r){switch(r){case y.L:return k[4*(t-1)+0];case y.M:return k[4*(t-1)+1];case y.Q:return k[4*(t-1)+2];case y.H:return k[4*(t-1)+3];default:return}}(t,r);if(void 0===e)throw"bad rs block @ typeNumber:"+t+"/errorCorrectionLevel:"+r;for(var n,o,i=e.length/3,a=[],u=0;u<i;u+=1)for(var f=e[3*u+0],c=e[3*u+1],g=e[3*u+2],l=0;l<f;l+=1)a.push((n=g,o=void 0,(o={}).totalCount=c,o.dataCount=n,o));return a},A),M=function(){var e=[],n=0,o={getBuffer:function(){return e},getAt:function(t){var r=Math.floor(t/8);return 1==(e[r]>>>7-t%8&1)},put:function(t,r){for(var e=0;e<r;e+=1)o.putBit(1==(t>>>r-e-1&1))},getLengthInBits:function(){return n},putBit:function(t){var r=Math.floor(n/8);e.length<=r&&e.push(0),t&&(e[r]|=128>>>n%8),n+=1}};return o},x=function(t){var r=a,n=t,e={getMode:function(){return r},getLength:function(t){return n.length},write:function(t){for(var r=n,e=0;e+2<r.length;)t.put(o(r.substring(e,e+3)),10),e+=3;e<r.length&&(r.length-e==1?t.put(o(r.substring(e,e+1)),4):r.length-e==2&&t.put(o(r.substring(e,e+2)),7))}},o=function(t){for(var r=0,e=0;e<t.length;e+=1)r=10*r+i(t.charAt(e));return r},i=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+t};return e},m=function(t){var r=u,n=t,e={getMode:function(){return r},getLength:function(t){return n.length},write:function(t){for(var r=n,e=0;e+1<r.length;)t.put(45*o(r.charAt(e))+o(r.charAt(e+1)),11),e+=2;e<r.length&&t.put(o(r.charAt(e)),6)}},o=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);if("A"<=t&&t<="Z")return t.charCodeAt(0)-"A".charCodeAt(0)+10;switch(t){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+t}};return e},L=function(t){var r=o,e=i.stringToBytes(t),n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=0;r<e.length;r+=1)t.put(e[r],8)}};return n},D=function(t){var r=f,e=i.stringToBytesFuncs.SJIS;if(!e)throw"sjis not supported.";!function(){var t=e("友");if(2!=t.length||38726!=(t[0]<<8|t[1]))throw"sjis not supported."}();var o=e(t),n={getMode:function(){return r},getLength:function(t){return~~(o.length/2)},write:function(t){for(var r=o,e=0;e+1<r.length;){var n=(255&r[e])<<8|255&r[e+1];if(33088<=n&&n<=40956)n-=33088;else{if(!(57408<=n&&n<=60351))throw"illegal char at "+(e+1)+"/"+n;n-=49472}n=192*(n>>>8&255)+(255&n),t.put(n,13),e+=2}if(e<r.length)throw"illegal char at "+(e+1)}};return n},S=function(t){var e=t,n=0,o=0,i=0,r={read:function(){for(;i<8;){if(n>=e.length){if(0==i)return-1;throw"unexpected end of file./"+i}var t=e.charAt(n);if(n+=1,"="==t)return i=0,-1;t.match(/^\s$/)||(o=o<<6|a(t.charCodeAt(0)),i+=6)}var r=o>>>i-8&255;return i-=8,r}},a=function(t){if(65<=t&&t<=90)return t-65;if(97<=t&&t<=122)return t-97+26;if(48<=t&&t<=57)return t-48+52;if(43==t)return 62;if(47==t)return 63;throw"c:"+t};return r},I=function(t,r,e){for(var n=function(t,r){var n=t,o=r,l=new Array(t*r),e={setPixel:function(t,r,e){l[r*n+t]=e},write:function(t){t.writeString("GIF87a"),t.writeShort(n),t.writeShort(o),t.writeByte(128),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(255),t.writeByte(255),t.writeByte(255),t.writeString(","),t.writeShort(0),t.writeShort(0),t.writeShort(n),t.writeShort(o),t.writeByte(0);var r=i(2);t.writeByte(2);for(var e=0;255<r.length-e;)t.writeByte(255),t.writeBytes(r,e,255),e+=255;t.writeByte(r.length-e),t.writeBytes(r,e,r.length-e),t.writeByte(0),t.writeString(";")}},i=function(t){for(var r=1<<t,e=1+(1<<t),n=t+1,o=h(),i=0;i<r;i+=1)o.add(String.fromCharCode(i));o.add(String.fromCharCode(r)),o.add(String.fromCharCode(e));var a=p(),u=function(t){var e=t,n=0,o=0,r={write:function(t,r){if(t>>>r!=0)throw"length over";for(;8<=n+r;)e.writeByte(255&(t<<n|o)),r-=8-n,t>>>=8-n,n=o=0;o|=t<<n,n+=r},flush:function(){0<n&&e.writeByte(o)}};return r}(a);u.write(r,n);var f=0,c=String.fromCharCode(l[f]);for(f+=1;f<l.length;){var g=String.fromCharCode(l[f]);f+=1,o.contains(c+g)?c+=g:(u.write(o.indexOf(c),n),o.size()<4095&&(o.size()==1<<n&&(n+=1),o.add(c+g)),c=g)}return u.write(o.indexOf(c),n),u.write(e,n),u.flush(),a.toByteArray()},h=function(){var r={},e=0,n={add:function(t){if(n.contains(t))throw"dup key:"+t;r[t]=e,e+=1},size:function(){return e},indexOf:function(t){return r[t]},contains:function(t){return void 0!==r[t]}};return n};return e}(t,r),o=0;o<r;o+=1)for(var i=0;i<t;i+=1)n.setPixel(i,o,e(i,o));var a=p();n.write(a);for(var u=function(){function e(t){a+=String.fromCharCode(r(63&t))}var n=0,o=0,i=0,a="",t={},r=function(t){if(t<0);else{if(t<26)return 65+t;if(t<52)return t-26+97;if(t<62)return t-52+48;if(62==t)return 43;if(63==t)return 47}throw"n:"+t};return t.writeByte=function(t){for(n=n<<8|255&t,o+=8,i+=1;6<=o;)e(n>>>o-6),o-=6},t.flush=function(){if(0<o&&(e(n<<6-o),o=n=0),i%3!=0)for(var t=3-i%3,r=0;r<t;r+=1)a+="="},t.toString=function(){return a},t}(),f=a.toByteArray(),c=0;c<f.length;c+=1)u.writeByte(f[c]);return u.flush(),"data:image/gif;base64,"+u};return i}();qrcode.stringToBytesFuncs["UTF-8"]=function(t){return function(t){for(var r=[],e=0;e<t.length;e++){var n=t.charCodeAt(e);n<128?r.push(n):n<2048?r.push(192|n>>6,128|63&n):n<55296||57344<=n?r.push(224|n>>12,128|n>>6&63,128|63&n):(e++,n=65536+((1023&n)<<10|1023&t.charCodeAt(e)),r.push(240|n>>18,128|n>>12&63,128|n>>6&63,128|63&n))}return r}(t)},function(t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports&&(module.exports=t())}(function(){return qrcode});
+    </script>
+    <script>
+    // 将内联库包装成与 npm qrcode 兼容的 QRCode.toDataURL API，保持原调用代码不变
+    (function(){
+        // 将全局工厂函数 qrcode 捕获到本地，避免与 window.QRCode 命名混淆
+        var QRFactory = window.qrcode;
+        qrcode.stringToBytes = qrcode.stringToBytesFuncs["UTF-8"]; // 默认UTF-8，支持中文
+        window.QRCode = {
+            toDataURL: function(text, opts, cb){
+                if (typeof opts === "function") { cb = opts; opts = {}; }
+                opts = opts || {};
+                var ecLevel = (opts.errorCorrectionLevel || "M").toString().toUpperCase();
+                if (ecLevel !== "L" && ecLevel !== "M" && ecLevel !== "Q" && ecLevel !== "H") ecLevel = "M";
+                var targetW = opts.width || 256;
+                var margin = (opts.margin != null) ? opts.margin : 2;
+                try {
+                    // QRFactory(typeNumber, ecLevel)：typeNumber=0 自动选择，ecLevel 必须传字符串 L/M/Q/H
+                    var qr = QRFactory(0, ecLevel);
+                    qr.addData(String(text), "Byte");
+                    qr.make();
+                    var count = qr.getModuleCount();
+                    // cellSize：让总宽度(含两边margin)尽量接近targetW
+                    var cellSize = Math.max(2, Math.floor((targetW - 2*margin) / count) || 4);
+                    var fullW = count * cellSize + margin * 2;
+                    var canvas = document.createElement('canvas');
+                    canvas.width = fullW;
+                    canvas.height = fullW;
+                    var ctx = canvas.getContext('2d');
+                    // 背景白
+                    var light = (opts.color && opts.color.light) || '#ffffff';
+                    var dark = (opts.color && opts.color.dark) || '#000000';
+                    ctx.fillStyle = light;
+                    ctx.fillRect(0, 0, fullW, fullW);
+                    ctx.fillStyle = dark;
+                    for (var r = 0; r < count; r++) {
+                        for (var cc = 0; cc < count; cc++) {
+                            if (qr.isDark(r, cc)) {
+                                ctx.fillRect(margin + cc * cellSize, margin + r * cellSize, cellSize, cellSize);
+                            }
+                        }
+                    }
+                    var dataUrl = canvas.toDataURL('image/png');
+                    if (cb) cb(null, dataUrl);
+                    return dataUrl;
+                } catch(e){
+                    console.error('QRCode generate error:', e);
+                    if (cb) return cb(e);
+                    throw e;
+                }
+            }
+        };
+    })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js'"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/jszip@3.10.1/dist/jszip.min.js'"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/file-saver@2.0.5/dist/FileSaver.min.js'"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 140px;
+        }
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* 悬浮控制条 - 垂直两行常驻 */
+        .float-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 12px 14px;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+            min-width: 320px;
+        }
+        .float-bar.show { display: flex; }
+        .float-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .float-row + .float-row {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+        .float-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .float-btn:hover { transform: scale(1.08); }
+        .float-btn.active { box-shadow: 0 0 0 3px rgba(255,255,255,0.6), 0 0 0 6px currentColor; }
+        .btn-scroll { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); box-shadow: 0 2px 12px rgba(102,126,234,0.4); }
+        .btn-play { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); box-shadow: 0 2px 12px rgba(17,153,142,0.4); }
+        .speed-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .speed-label { font-size: 12px; color: #64748b; white-space: nowrap; font-weight: 600; }
+        .speed-val { font-size: 12px; font-weight: 700; min-width: 56px; text-align: right; }
+        .speed-group input[type="range"] { flex: 1; width: 100%; }
+
+        /* 滑块美化 */
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 5px;
+            border-radius: 3px;
+            background: #e2e8f0;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+        }
+        input[type="number"] {
+            width: 70px;
+            padding: 4px 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 13px;
+            text-align: center;
+        }
+        select {
+            padding: 6px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+        }
+
+        /* 条码项 */
+        .barcode-item {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        .barcode-item.highlight {
+            border: 3px solid #667eea;
+            transform: scale(1.02);
+            box-shadow: 0 4px 24px rgba(102, 126, 234, 0.3);
+        }
+        .barcode-item svg, .barcode-item canvas, .barcode-item img { max-width: 100%; }
+
+        /* 条码内容+序号同行显示 */
+        .barcode-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .barcode-text {
+            font-family: 'SF Mono', Menlo, Consolas, monospace;
+            color: #374151;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        .barcode-index {
+            background: #667eea;
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* 首页卡片 */
+        .hero-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+        }
+        .hero-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        .hero-icon {
+            width: 80px; height: 80px; margin: 0 auto 20px;
+            border-radius: 20px; display: flex; align-items: center; justify-content: center;
+            font-size: 40px; color: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border: none; padding: 10px 22px; border-radius: 10px;
+            font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(102, 126, 234, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-2px); }
+        .btn-secondary {
+            background: white; color: #667eea; border: 2px solid #667eea;
+            padding: 8px 20px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover { background: #667eea; color: white; }
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white; border: none; padding: 10px 22px; border-radius: 10px;
+            font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(17,153,142,0.3);
+        }
+        .btn-success:hover { transform: translateY(-2px); }
+        .btn-danger {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            color: white; border: none; padding: 10px 22px; border-radius: 10px;
+            font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(235,51,73,0.3);
+        }
+        .btn-danger:hover { transform: translateY(-2px); }
+        .btn-warm {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white; border: none; padding: 10px 22px; border-radius: 10px;
+            font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(245,87,108,0.3);
+        }
+        .btn-warm:hover { transform: translateY(-2px); }
+
+        textarea {
+            width: 100%; border: 2px solid #e2e8f0; border-radius: 12px;
+            padding: 16px; font-size: 15px;
+            font-family: 'SF Mono', Menlo, Consolas, monospace;
+            resize: vertical; min-height: 150px; transition: border-color 0.3s;
+        }
+        textarea:focus { outline: none; border-color: #667eea; }
+
+        .card {
+            background: white; border-radius: 16px; padding: 24px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06); margin-bottom: 20px;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px; color: #667eea;
+            font-weight: 600; cursor: pointer; margin-bottom: 20px; padding: 8px 16px;
+            border-radius: 8px; transition: background 0.3s;
+        }
+        .back-btn:hover { background: rgba(102, 126, 234, 0.1); }
+
+        /* 幻灯覆盖层 */
+        .slideshow-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9); z-index: 2000; display: none;
+            align-items: center; justify-content: center; flex-direction: column;
+        }
+        .slideshow-overlay.active { display: flex; }
+        .slideshow-item {
+            background: white; padding: 40px; border-radius: 20px; max-width: 90vw; max-height: 80vh;
+            display: flex; flex-direction: column; align-items: center; overflow: auto;
+        }
+        .slideshow-close {
+            position: absolute; top: 24px; right: 24px; width: 48px; height: 48px;
+            border-radius: 50%; background: rgba(255,255,255,0.2); color: white; border: none;
+            font-size: 24px; cursor: pointer;
+        }
+        .slideshow-counter { color: white; margin-top: 20px; font-size: 18px; }
+
+        /* Toast */
+        .toast {
+            position: fixed; top: 24px; left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: #333; color: white; padding: 12px 24px;
+            border-radius: 10px; z-index: 3000; transition: transform 0.3s;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* 复选框标签 */
+        .chk-label {
+            display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+            font-size: 14px; color: #374151; user-select: none;
+        }
+        .chk-label input[type="checkbox"] {
+            width: 16px; height: 16px; cursor: pointer; accent-color: #667eea;
+        }
+
+        /* ========== 打印设置弹窗 ========== */
+        .modal-mask {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2500;
+            display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal-mask.active { display: flex; }
+        .modal-box {
+            background: white; border-radius: 16px; width: 100%; max-width: 720px;
+            max-height: 90vh; overflow-y: auto; padding: 28px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .modal-title {
+            font-size: 20px; font-weight: 700; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            color: #1e293b;
+        }
+        .modal-close {
+            width: 32px; height: 32px; border-radius: 50%; border: none;
+            background: #f1f5f9; cursor: pointer; font-size: 18px; color: #64748b;
+        }
+        .modal-close:hover { background: #e2e8f0; }
+        .setting-group { margin-bottom: 20px; }
+        .setting-group-title {
+            font-size: 14px; font-weight: 700; color: #475569;
+            margin-bottom: 10px; padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .setting-row {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+            gap: 12px; margin-bottom: 10px;
+        }
+        .setting-field { display: flex; flex-direction: column; gap: 4px; }
+        .setting-field label { font-size: 12px; color: #64748b; font-weight: 600; }
+        .setting-field input, .setting-field select {
+            padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px;
+            font-size: 14px; width: 100%;
+        }
+        .setting-field input:focus, .setting-field select:focus {
+            outline: none; border-color: #667eea;
+        }
+        .radio-row { display: flex; gap: 16px; flex-wrap: wrap; }
+        .radio-row label {
+            display: inline-flex; align-items: center; gap: 6px;
+            cursor: pointer; font-size: 14px;
+        }
+        .modal-footer {
+            display: flex; justify-content: flex-end; gap: 10px;
+            margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;
+        }
+
+        /* ========== 打印专用样式 ========== */
+        @media print {
+            body * { visibility: hidden !important; }
+            #print-area, #print-area * { visibility: visible !important; }
+            #print-area {
+                position: absolute; left: 0; top: 0; width: 100%;
+                background: white; padding: 0; margin: 0;
+            }
+            .print-page { page-break-after: always; }
+            .print-page:last-child { page-break-after: auto; }
+            @page { margin: 0; }
+        }
+        .print-page {
+            background: white; box-sizing: border-box;
+            display: flex; flex-direction: column;
+        }
+        .print-grid {
+            flex: 1; display: grid;
+        }
+        .print-cell {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            overflow: hidden; page-break-inside: avoid;
+        }
+        .print-cell svg, .print-cell canvas, .print-cell img { max-width: 100%; max-height: 100%; }
+        .print-page-num {
+            text-align: center; font-size: 10pt; color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="toast" class="toast"></div>
+
+    <!-- ========== 首页 ========== -->
+    <div id="home-page" class="page active">
+        <div class="max-w-4xl mx-auto px-6 py-16">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent">
+                    批量条码生成系统
+                </h1>
+                <p class="text-gray-600 text-lg">快速批量生成条形码和二维码，方便扫描枪识别 · 支持打印导出</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="hero-card" onclick="showPage('barcode-page')">
+                    <div class="hero-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📊</div>
+                    <h2 class="text-2xl font-bold mb-2 text-gray-800">批量条形码生成</h2>
+                    <p class="text-gray-500">批量输入、Excel导入，生成 CODE128 条形码</p>
+                </div>
+                <div class="hero-card" onclick="showPage('qrcode-page')">
+                    <div class="hero-icon" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">⬜</div>
+                    <h2 class="text-2xl font-bold mb-2 text-gray-800">批量二维码生成</h2>
+                    <p class="text-gray-500">批量输入、Excel导入，生成 QR 二维码</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 条形码页 ========== -->
+    <div id="barcode-page" class="page">
+        <div class="max-w-3xl mx-auto px-6 py-8">
+            <div class="back-btn" onclick="showPage('home-page')">← 返回首页</div>
+            <h1 class="text-3xl font-bold mb-6 text-gray-800">批量条形码生成系统</h1>
+
+            <div class="card">
+                <div class="mb-5">
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        字体大小: <span id="barcode-font-size-value" class="text-[#667eea]">20</span> px
+                    </label>
+                    <input type="range" id="barcode-font-size" min="10" max="50" value="20" oninput="document.getElementById('barcode-font-size-value').textContent=this.value">
+                </div>
+                <div class="mb-5">
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        条码高度: <span id="barcode-height-value" class="text-[#667eea]">100</span> px
+                    </label>
+                    <input type="range" id="barcode-height" min="40" max="200" value="100" oninput="document.getElementById('barcode-height-value').textContent=this.value">
+                </div>
+                <div class="mb-5">
+                    <label class="chk-label">
+                        <input type="checkbox" id="barcode-show-index" checked>
+                        显示序号（位于条码数据旁边）
+                    </label>
+                </div>
+                <div class="mb-5">
+                    <label class="block text-gray-700 font-semibold mb-2">条码内容（每行一条数据）</label>
+                    <textarea id="barcode-input" placeholder="请输入或粘贴条码内容，每行一条...&#10;例如：&#10;1234567890&#10;ABCDEFGHIJ&#10;9876543210"></textarea>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button class="btn-primary" onclick="generateBarcodes()">🔨 生成条码</button>
+                    <button class="btn-secondary" onclick="document.getElementById('barcode-excel').click()">📁 从Excel导入</button>
+                    <input type="file" id="barcode-excel" accept=".xlsx,.xls,.csv" style="display:none" onchange="importExcel('barcode', event)">
+                    <button class="btn-success" onclick="downloadAll('barcode')">💾 下载全部</button>
+                    <button class="btn-warm" onclick="openPrintModal()">🖨️ 打印导出</button>
+                    <button class="btn-danger" onclick="clearAll('barcode')">🗑️ 清空</button>
+                </div>
+            </div>
+
+            <div id="barcode-display-area">
+                <div id="barcode-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 二维码页 ========== -->
+    <div id="qrcode-page" class="page">
+        <div class="max-w-3xl mx-auto px-6 py-8">
+            <div class="back-btn" onclick="showPage('home-page')">← 返回首页</div>
+            <h1 class="text-3xl font-bold mb-6 text-gray-800">批量二维码生成系统</h1>
+
+            <div class="card">
+                <div class="mb-5">
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        二维码大小: <span id="qrcode-size-value" class="text-[#11998e]">256</span> px
+                    </label>
+                    <input type="range" id="qrcode-size" min="100" max="500" value="256" step="20" oninput="document.getElementById('qrcode-size-value').textContent=this.value">
+                </div>
+                <div class="mb-5">
+                    <label class="block text-gray-700 font-semibold mb-2">容错级别</label>
+                    <div class="flex gap-4 flex-wrap">
+                        <label class="chk-label"><input type="radio" name="ec-level" value="L"> L (低)</label>
+                        <label class="chk-label"><input type="radio" name="ec-level" value="M" checked> M (中)</label>
+                        <label class="chk-label"><input type="radio" name="ec-level" value="Q"> Q (较高)</label>
+                        <label class="chk-label"><input type="radio" name="ec-level" value="H"> H (高)</label>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <label class="chk-label">
+                        <input type="checkbox" id="qrcode-show-index" checked>
+                        显示序号（位于二维码数据旁边）
+                    </label>
+                </div>
+                <div class="mb-5">
+                    <label class="block text-gray-700 font-semibold mb-2">二维码内容（每行一条数据）</label>
+                    <textarea id="qrcode-input" placeholder="请输入或粘贴二维码内容，每行一条...&#10;例如：&#10;https://www.example.com&#10;Hello World&#10;123456789"></textarea>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button class="btn-success" onclick="generateQrcodes()">🔨 生成二维码</button>
+                    <button class="btn-secondary" onclick="document.getElementById('qrcode-excel').click()">📁 从Excel导入</button>
+                    <input type="file" id="qrcode-excel" accept=".xlsx,.xls,.csv" style="display:none" onchange="importExcel('qrcode', event)">
+                    <button class="btn-primary" onclick="downloadAll('qrcode')">💾 下载全部</button>
+                    <button class="btn-warm" onclick="openPrintModal()">🖨️ 打印导出</button>
+                    <button class="btn-danger" onclick="clearAll('qrcode')">🗑️ 清空</button>
+                </div>
+            </div>
+
+            <div id="qrcode-display-area">
+                <div id="qrcode-list" class="flex flex-col items-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 悬浮控制条（垂直两行常驻） ========== -->
+    <div class="float-bar" id="float-bar">
+        <div class="float-row">
+            <button class="float-btn btn-scroll" id="scroll-btn" onclick="toggleScroll()" title="自动滚动 (空格启停)">⇅</button>
+            <div class="speed-group">
+                <span class="speed-label">滚动速度</span>
+                <input type="range" id="scroll-speed" min="1" max="100" value="20">
+                <span class="speed-val" id="scroll-speed-val" style="color:#667eea">336px/s</span>
+            </div>
+        </div>
+        <div class="float-row">
+            <button class="float-btn btn-play" id="play-btn" onclick="toggleSlideshow()" title="幻灯播放">▶</button>
+            <div class="speed-group">
+                <span class="speed-label">播放间隔</span>
+                <!-- 0~100 对数映射：200ms~20s，最慢20秒/张，最快0.2秒/张 -->
+                <input type="range" id="play-speed" min="0" max="100" value="50" step="1">
+                <span class="speed-val" id="play-speed-val" style="color:#11998e;min-width:52px;text-align:right;">2.0s</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 幻灯覆盖层 ========== -->
+    <div class="slideshow-overlay" id="slideshow-overlay">
+        <button class="slideshow-close" onclick="stopSlideshow()">✕</button>
+        <div class="slideshow-item" id="slideshow-item"></div>
+        <div class="slideshow-counter" id="slideshow-counter">1 / 10</div>
+    </div>
+
+    <!-- ========== 打印设置弹窗 ========== -->
+    <div class="modal-mask" id="print-modal">
+        <div class="modal-box">
+            <div class="modal-title">
+                <span>🖨️ 打印设置</span>
+                <button class="modal-close" onclick="closePrintModal()">✕</button>
+            </div>
+
+            <div class="setting-group">
+                <div class="setting-group-title">布局设置</div>
+                <div class="setting-row">
+                    <div class="setting-field">
+                        <label>排列方向</label>
+                        <select id="p-layout">
+                            <option value="h">横向顺序（先行后列）</option>
+                            <option value="v">纵向顺序（先列后行）</option>
+                        </select>
+                    </div>
+                    <div class="setting-field">
+                        <label>每页列数</label>
+                        <input type="number" id="p-cols" value="4" min="1" max="20">
+                    </div>
+                    <div class="setting-field">
+                        <label>每页行数（0=自动）</label>
+                        <input type="number" id="p-rows" value="0" min="0" max="30">
+                    </div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <div class="setting-group-title">页边距（毫米）</div>
+                <div class="setting-row">
+                    <div class="setting-field"><label>左边距</label><input type="number" id="p-margin-l" value="10" min="0" step="1"></div>
+                    <div class="setting-field"><label>右边距</label><input type="number" id="p-margin-r" value="10" min="0" step="1"></div>
+                    <div class="setting-field"><label>上边距</label><input type="number" id="p-margin-t" value="10" min="0" step="1"></div>
+                    <div class="setting-field"><label>下边距</label><input type="number" id="p-margin-b" value="10" min="0" step="1"></div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <div class="setting-group-title">条码间距（毫米）</div>
+                <div class="setting-row">
+                    <div class="setting-field"><label>水平间距</label><input type="number" id="p-gap-x" value="5" min="0" step="1"></div>
+                    <div class="setting-field"><label>垂直间距</label><input type="number" id="p-gap-y" value="5" min="0" step="1"></div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <div class="setting-group-title">页面设置</div>
+                <div class="setting-row">
+                    <div class="setting-field">
+                        <label>纸张方向</label>
+                        <select id="p-orientation">
+                            <option value="portrait">纵向</option>
+                            <option value="landscape">横向</option>
+                        </select>
+                    </div>
+                    <div class="setting-field">
+                        <label>纸张规格</label>
+                        <select id="p-paper" onchange="onPaperChange()">
+                            <option value="A4">A4 (210×297mm)</option>
+                            <option value="A5">A5 (148×210mm)</option>
+                            <option value="A3">A3 (297×420mm)</option>
+                            <option value="B5">B5 (176×250mm)</option>
+                            <option value="Letter">Letter (216×279mm)</option>
+                            <option value="custom">自定义</option>
+                        </select>
+                    </div>
+                    <div class="setting-field">
+                        <label>纸宽 (mm)</label>
+                        <input type="number" id="p-width" value="210" min="20" step="1">
+                    </div>
+                    <div class="setting-field">
+                        <label>纸高 (mm)</label>
+                        <input type="number" id="p-height" value="297" min="20" step="1">
+                    </div>
+                </div>
+                <div class="setting-row" style="margin-top:10px">
+                    <div class="setting-field">
+                        <label>缩放比例 (%)</label>
+                        <input type="number" id="p-scale" value="100" min="10" max="300" step="5">
+                    </div>
+                    <div class="setting-field" style="justify-content:flex-end">
+                        <label class="chk-label" style="margin-top:22px">
+                            <input type="checkbox" id="p-pagenum"> 显示打印页码
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closePrintModal()">取消</button>
+                <button class="btn-primary" onclick="previewPrint()">👁 预览</button>
+                <button class="btn-success" onclick="doPrint()">🖨️ 打印</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 打印渲染区域（动态插入） -->
+    <div id="print-area" style="display:none"></div>
+
+    <script>
+        /* ====== 全局状态 ====== */
+        let currentType = 'barcode';
+        let isScrolling = false;
+        let scrollAnimationId = null;
+        let scrollY = 0;
+        let isPlaying = false;
+        let playIntervalId = null;
+        let currentSlideIndex = 0;
+        let generatedItems = [];
+
+        const PAPER_SIZES = {
+            A4: [210, 297], A5: [148, 210], A3: [297, 420],
+            B5: [176, 250], Letter: [216, 279]
+        };
+
+        /* ====== 页面切换 ====== */
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            stopScroll(); stopSlideshow();
+            const bar = document.getElementById('float-bar');
+            if (pageId === 'home-page') {
+                bar.classList.remove('show');
+            } else {
+                bar.classList.add('show');
+                currentType = pageId === 'barcode-page' ? 'barcode' : 'qrcode';
+            }
+            window.scrollTo(0, 0);
+        }
+
+        /* ====== Toast ====== */
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2000);
+        }
+
+        /* ====== 速度滑块实时显示 ====== */
+        document.getElementById('scroll-speed').addEventListener('input', function() {
+            // 数值显示近似速度（px/s）：档位1~100 → 60px/s ~ 1500px/s
+            const v = parseInt(this.value);
+            const pxps = Math.round(60 + (v - 1) * 14.55); // 线性: v=1→60, v=100→60+99*14.55≈1500
+            document.getElementById('scroll-speed-val').textContent = pxps < 1000 ? pxps + 'px/s' : (pxps/1000).toFixed(1) + 'k/s';
+        });
+        // 播放间隔：0~100 对数映射 → 20000ms(慢,左) ~ 200ms(快,右)，左慢右快（符合习惯）
+        // v=0 → 20000ms(20s/张 最慢); v=50 → 2000ms(2s/张 默认); v=100 → 200ms(约5张/秒 最快)
+        function getPlayInterval() {
+            const v = parseInt(document.getElementById('play-speed').value);
+            return Math.max(200, Math.round(20000 * Math.pow(0.01, v / 100)));
+        }
+        function formatInterval(ms) {
+            if (ms < 1000) return ms + 'ms';
+            return (ms/1000).toFixed(1) + 's';
+        }
+        document.getElementById('play-speed').addEventListener('input', function() {
+            const ms = getPlayInterval();
+            document.getElementById('play-speed-val').textContent = formatInterval(ms);
+            if (isPlaying) {
+                clearInterval(playIntervalId);
+                playIntervalId = setInterval(() => {
+                    currentSlideIndex = (currentSlideIndex + 1) % generatedItems.length;
+                    showSlide(currentSlideIndex);
+                }, ms);
+            }
+        });
+        // 初始化显示
+        (function initSpeedDisplay(){
+            const sv = document.getElementById('scroll-speed').value;
+            const pxps = Math.round(60 + (sv - 1) * 14.55);
+            document.getElementById('scroll-speed-val').textContent = pxps<1000?pxps+'px/s':(pxps/1000).toFixed(1)+'k/s';
+            document.getElementById('play-speed-val').textContent = formatInterval(getPlayInterval());
+        })();
+
+        /* ====== Excel 导入 ====== */
+        function importExcel(type, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const wb = XLSX.read(data, { type: 'array' });
+                    const ws = wb.Sheets[wb.SheetNames[0]];
+                    const json = XLSX.utils.sheet_to_json(ws, { header: 1 });
+                    const lines = json
+                        .map(r => r[0])
+                        .filter(v => v !== undefined && v !== null && String(v).trim() !== '')
+                        .map(v => String(v).trim());
+                    document.getElementById(type + '-input').value = lines.join('\n');
+                    showToast(`成功导入 ${lines.length} 条数据`);
+                } catch (err) {
+                    showToast('导入失败，请检查文件格式');
+                    console.error(err);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+            event.target.value = '';
+        }
+
+        /* ====== 生成条形码 ====== */
+        function generateBarcodes() {
+            const input = document.getElementById('barcode-input').value.trim();
+            if (!input) { showToast('请先输入条码内容'); return; }
+            const lines = input.split('\n').map(l => l.trim()).filter(l => l);
+            if (!lines.length) { showToast('没有有效数据'); return; }
+
+            const fontSize = parseInt(document.getElementById('barcode-font-size').value);
+            const height = parseInt(document.getElementById('barcode-height').value);
+            const showIndex = document.getElementById('barcode-show-index').checked;
+            const listDiv = document.getElementById('barcode-list');
+            listDiv.innerHTML = '';
+            generatedItems = [];
+
+            lines.forEach((text, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'barcode-item';
+                itemDiv.id = 'barcode-item-' + index;
+
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.id = 'barcode-svg-' + index;
+                itemDiv.appendChild(svg);
+
+                // 元信息行：序号+内容 同行
+                const meta = document.createElement('div');
+                meta.className = 'barcode-meta';
+                if (showIndex) {
+                    const idx = document.createElement('span');
+                    idx.className = 'barcode-index';
+                    idx.textContent = '#' + (index + 1);
+                    meta.appendChild(idx);
+                }
+                const txt = document.createElement('span');
+                txt.className = 'barcode-text';
+                txt.textContent = text;
+                meta.appendChild(txt);
+                itemDiv.appendChild(meta);
+
+                listDiv.appendChild(itemDiv);
+
+                try {
+                    JsBarcode(svg, text, {
+                        format: "CODE128", width: 2, height: height,
+                        displayValue: false, fontSize: fontSize, margin: 10, font: 'monospace'
+                    });
+                    generatedItems.push({ id: index, text: text, element: itemDiv });
+                } catch (err) {
+                    itemDiv.innerHTML = `<div class="text-red-500 py-8">❌ 无法生成: ${text} (${err.message})</div>`;
+                }
+            });
+            showToast(`成功生成 ${generatedItems.length} 个条形码`);
+        }
+
+        /* ====== 生成二维码 ====== */
+        function generateQrcodes() {
+            if (typeof QRCode === 'undefined') {
+                showToast('二维码库未加载，请刷新页面重试');
+                return;
+            }
+            const input = document.getElementById('qrcode-input').value.trim();
+            if (!input) { showToast('请先输入二维码内容'); return; }
+            const lines = input.split('\n').map(l => l.trim()).filter(l => l);
+            if (!lines.length) { showToast('没有有效数据'); return; }
+
+            const size = parseInt(document.getElementById('qrcode-size').value);
+            const ecLevel = document.querySelector('input[name="ec-level"]:checked').value;
+            const showIndex = document.getElementById('qrcode-show-index').checked;
+            const listDiv = document.getElementById('qrcode-list');
+            listDiv.innerHTML = '';
+            generatedItems = [];
+
+            // 逐张生成（toDataURL方式，比canvas更稳定）
+            (async () => {
+                let successCount = 0;
+                for (let index = 0; index < lines.length; index++) {
+                    const text = lines[index];
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'barcode-item';
+                    itemDiv.id = 'qrcode-item-' + index;
+                    itemDiv.style.maxWidth = (size + 80) + 'px';
+
+                    const img = document.createElement('img');
+                    img.id = 'qrcode-img-' + index;
+                    img.alt = text;
+                    img.style.width = size + 'px';
+                    img.style.height = size + 'px';
+                    img.style.imageRendering = 'pixelated';
+                    itemDiv.appendChild(img);
+
+                    const meta = document.createElement('div');
+                    meta.className = 'barcode-meta';
+                    meta.style.marginTop = '12px';
+                    if (showIndex) {
+                        const idx = document.createElement('span');
+                        idx.className = 'barcode-index';
+                        idx.style.background = 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)';
+                        idx.textContent = '#' + (index + 1);
+                        meta.appendChild(idx);
+                    }
+                    const txt = document.createElement('span');
+                    txt.className = 'barcode-text';
+                    txt.style.fontSize = Math.max(12, size / 18) + 'px';
+                    txt.style.maxWidth = size + 'px';
+                    txt.textContent = text.length > 60 ? text.substring(0, 60) + '...' : text;
+                    txt.title = text;
+                    meta.appendChild(txt);
+                    itemDiv.appendChild(meta);
+
+                    listDiv.appendChild(itemDiv);
+
+                    try {
+                        const dataUrl = await new Promise((resolve, reject) => {
+                            QRCode.toDataURL(text, {
+                                width: size * 2,    // 2倍密度高清
+                                margin: 2,
+                                errorCorrectionLevel: ecLevel,
+                                color: { dark: '#000000', light: '#ffffff' }
+                            }, (err, url) => err ? reject(err) : resolve(url));
+                        });
+                        img.src = dataUrl;
+                        generatedItems.push({ id: index, text: text, element: itemDiv, img: img, dataUrl: dataUrl });
+                        successCount++;
+                    } catch (err) {
+                        console.error('QRCode error:', err);
+                        itemDiv.innerHTML = `<div class="text-red-500 py-4">❌ 无法生成: ${text.substring(0,30)}<br><small style="color:#999">${err.message || err}</small></div>`;
+                    }
+                }
+                showToast(`成功生成 ${successCount} 个二维码`);
+            })();
+        }
+
+        /* ====== 清空 ====== */
+        function clearAll(type) {
+            document.getElementById(type + '-list').innerHTML = '';
+            document.getElementById(type + '-input').value = '';
+            generatedItems = [];
+            stopScroll(); stopSlideshow();
+            showToast('已清空');
+        }
+
+        /* ====== 下载全部 (ZIP) ====== */
+        async function downloadAll(type) {
+            if (!generatedItems.length) { showToast('请先生成条码'); return; }
+            showToast('正在打包下载...');
+            const zip = new JSZip();
+            const folder = zip.folder(type + '_' + Date.now());
+
+            for (const item of generatedItems) {
+                let dataUrl;
+                if (type === 'barcode') {
+                    const svg = document.getElementById('barcode-svg-' + item.id);
+                    const svgData = new XMLSerializer().serializeToString(svg);
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const img = new Image();
+                    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+                    const url = URL.createObjectURL(svgBlob);
+                    await new Promise(resolve => {
+                        img.onload = function() {
+                            canvas.width = img.width * 2;
+                            canvas.height = img.height * 2;
+                            ctx.scale(2,2); ctx.fillStyle='white';
+                            ctx.fillRect(0,0,canvas.width,canvas.height);
+                            ctx.drawImage(img,0,0);
+                            dataUrl = canvas.toDataURL('image/png');
+                            URL.revokeObjectURL(url); resolve();
+                        };
+                        img.src = url;
+                    });
+                } else {
+                    dataUrl = generatedItems.find(g => g.id === item.id).dataUrl;
+                }
+                const base64 = dataUrl.split(',')[1];
+                const name = item.text.replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '_').substring(0,50);
+                folder.file(`${String(item.id+1).padStart(3,'0')}_${name}.png`, base64, { base64: true });
+            }
+            const content = await zip.generateAsync({ type: 'blob' });
+            saveAs(content, `${type}批量_${generatedItems.length}个_${new Date().toLocaleDateString()}.zip`);
+            showToast('下载完成！');
+        }
+
+        /* ====== 自动滚动 ====== */
+        function toggleScroll() {
+            if (!generatedItems.length) { showToast('请先生成条码'); return; }
+            if (isScrolling) { stopScroll(); } else { startScroll(); }
+        }
+        function startScroll() {
+            isScrolling = true;
+            document.getElementById('scroll-btn').classList.add('active');
+            document.getElementById('scroll-btn').textContent = '⏸';
+            stopSlideshow();
+            scrollY = window.scrollY;
+            let lastTime = performance.now();
+            function step(now) {
+                const dt = (now - lastTime) / 1000; // 秒
+                lastTime = now;
+                const v = parseInt(document.getElementById('scroll-speed').value);
+                const pxps = 60 + (v - 1) * 14.55; // 线性: v=1→60px/s, v=100→1500px/s
+                scrollY += pxps * dt;
+                const max = document.documentElement.scrollHeight - window.innerHeight;
+                if (scrollY >= max) scrollY = 0;
+                window.scrollTo(0, scrollY);
+                scrollAnimationId = requestAnimationFrame(step);
+            }
+            scrollAnimationId = requestAnimationFrame(step);
+        }
+        function stopScroll() {
+            isScrolling = false;
+            if (scrollAnimationId) { cancelAnimationFrame(scrollAnimationId); scrollAnimationId = null; }
+            document.getElementById('scroll-btn').classList.remove('active');
+            document.getElementById('scroll-btn').textContent = '⇅';
+        }
+
+        /* ====== 幻灯播放 ====== */
+        function toggleSlideshow() {
+            if (!generatedItems.length) { showToast('请先生成条码'); return; }
+            if (isPlaying) { stopSlideshow(); } else { startSlideshow(); }
+        }
+        function startSlideshow() {
+            isPlaying = true; currentSlideIndex = 0;
+            document.getElementById('play-btn').classList.add('active');
+            document.getElementById('play-btn').textContent = '⏸';
+            stopScroll();
+            document.getElementById('slideshow-overlay').classList.add('active');
+            showSlide(currentSlideIndex);
+            const interval = getPlayInterval();
+            playIntervalId = setInterval(() => {
+                currentSlideIndex = (currentSlideIndex + 1) % generatedItems.length;
+                showSlide(currentSlideIndex);
+            }, interval);
+        }
+        function showSlide(index) {
+            const item = generatedItems[index];
+            const slideItem = document.getElementById('slideshow-item');
+            document.querySelectorAll('.barcode-item').forEach(el => el.classList.remove('highlight'));
+            item.element.classList.add('highlight');
+            item.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            slideItem.innerHTML = '';
+            if (currentType === 'barcode') {
+                const svg = document.getElementById('barcode-svg-' + item.id);
+                const clone = svg.cloneNode(true);
+                clone.setAttribute('width', Math.min(500, window.innerWidth * 0.7));
+                clone.style.maxWidth = '100%';
+                slideItem.appendChild(clone);
+                const t = document.createElement('div');
+                t.className = 'mt-4 text-2xl font-mono text-center break-all max-w-2xl';
+                t.textContent = item.text;
+                slideItem.appendChild(t);
+            } else {
+                const srcImg = document.getElementById('qrcode-img-' + item.id);
+                const img = document.createElement('img');
+                const sz = Math.min(500, window.innerWidth * 0.7);
+                img.src = srcImg.src;
+                img.style.width = sz + 'px';
+                img.style.height = sz + 'px';
+                img.style.imageRendering = 'pixelated';
+                slideItem.appendChild(img);
+                const t = document.createElement('div');
+                t.className = 'mt-4 text-xl text-center break-all max-w-md';
+                t.textContent = item.text;
+                slideItem.appendChild(t);
+            }
+            document.getElementById('slideshow-counter').textContent = `${index+1} / ${generatedItems.length}`;
+        }
+        function stopSlideshow() {
+            isPlaying = false;
+            if (playIntervalId) { clearInterval(playIntervalId); playIntervalId = null; }
+            document.getElementById('play-btn').classList.remove('active');
+            document.getElementById('play-btn').textContent = '▶';
+            document.getElementById('slideshow-overlay').classList.remove('active');
+            document.querySelectorAll('.barcode-item').forEach(el => el.classList.remove('highlight'));
+        }
+
+        /* ====== 键盘快捷键 ====== */
+        document.addEventListener('keydown', function(e) {
+            // 避免在输入框中触发
+            if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName) && !e.target.closest('#print-modal')) {
+                if (e.key === 'Escape') { stopScroll(); stopSlideshow(); }
+                return;
+            }
+            if (e.key === 'Escape') {
+                stopScroll(); stopSlideshow(); closePrintModal();
+            }
+            if (isPlaying) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    currentSlideIndex = (currentSlideIndex + 1) % generatedItems.length;
+                    showSlide(currentSlideIndex);
+                } else if (e.key === 'ArrowLeft') {
+                    currentSlideIndex = (currentSlideIndex - 1 + generatedItems.length) % generatedItems.length;
+                    showSlide(currentSlideIndex);
+                }
+            } else if (e.key === ' ' && generatedItems.length && !document.getElementById('print-modal').classList.contains('active')) {
+                e.preventDefault(); toggleScroll();
+            }
+        });
+
+        /* =========================================================
+         *  打印功能
+         * ========================================================= */
+        function openPrintModal() {
+            if (!generatedItems.length) { showToast('请先生成条码'); return; }
+            document.getElementById('print-modal').classList.add('active');
+        }
+        function closePrintModal() {
+            document.getElementById('print-modal').classList.remove('active');
+            document.getElementById('print-area').style.display = 'none';
+            document.getElementById('print-area').innerHTML = '';
+        }
+        function onPaperChange() {
+            const v = document.getElementById('p-paper').value;
+            const wInput = document.getElementById('p-width');
+            const hInput = document.getElementById('p-height');
+            if (PAPER_SIZES[v]) {
+                wInput.value = PAPER_SIZES[v][0];
+                hInput.value = PAPER_SIZES[v][1];
+                wInput.disabled = false; hInput.disabled = false;
+            } else {
+                wInput.disabled = false; hInput.disabled = false;
+            }
+            // 根据纸张方向智能互换宽高
+            applyOrientation();
+        }
+        function applyOrientation() {
+            // 切换纵向/横向时自动交换宽高（仅当非自定义时友好处理）
+            // 不强制交换，让用户决定；这里留空
+        }
+        document.getElementById('p-orientation').addEventListener('change', function() {
+            const w = document.getElementById('p-width').value;
+            const h = document.getElementById('p-height').value;
+            // 用户主动切换方向时，交换宽高
+            document.getElementById('p-width').value = h;
+            document.getElementById('p-height').value = w;
+        });
+
+        function getPrintSettings() {
+            return {
+                layout: document.getElementById('p-layout').value,   // h 横向先行 / v 纵向先列
+                cols: parseInt(document.getElementById('p-cols').value) || 4,
+                rows: parseInt(document.getElementById('p-rows').value) || 0,
+                ml: parseInt(document.getElementById('p-margin-l').value) || 0,
+                mr: parseInt(document.getElementById('p-margin-r').value) || 0,
+                mt: parseInt(document.getElementById('p-margin-t').value) || 0,
+                mb: parseInt(document.getElementById('p-margin-b').value) || 0,
+                gx: parseInt(document.getElementById('p-gap-x').value) || 0,
+                gy: parseInt(document.getElementById('p-gap-y').value) || 0,
+                orientation: document.getElementById('p-orientation').value,
+                paperW: parseFloat(document.getElementById('p-width').value) || 210,
+                paperH: parseFloat(document.getElementById('p-height').value) || 297,
+                scale: (parseFloat(document.getElementById('p-scale').value) || 100) / 100,
+                pageNum: document.getElementById('p-pagenum').checked
+            };
+        }
+
+        // 将条码元素转换为 dataURL
+        async function itemToDataURL(item, cellW_px, cellH_px, scale) {
+            // cellW/H 是 CSS px；按设备像素比生成图
+            const dpr = 2;
+            const targetW = cellW_px * scale;
+            const targetH = cellH_px * scale;
+            const canvas = document.createElement('canvas');
+            canvas.width = targetW * dpr;
+            canvas.height = targetH * dpr;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, targetW, targetH);
+
+            if (currentType === 'barcode') {
+                const svg = document.getElementById('barcode-svg-' + item.id);
+                const svgData = new XMLSerializer().serializeToString(svg);
+                const img = new Image();
+                const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                await new Promise((resolve, reject) => {
+                    img.onload = () => {
+                        // 等比缩放填入，保留一点内边距
+                        const pad = 8 * scale;
+                        const availW = targetW - pad*2;
+                        const availH = targetH - pad*2 - 16*scale; // 留出文本位置
+                        const ratio = Math.min(availW / img.naturalWidth, availH / img.naturalHeight, 1);
+                        const drawW = img.naturalWidth * ratio;
+                        const drawH = img.naturalHeight * ratio;
+                        const x = (targetW - drawW) / 2;
+                        const y = pad;
+                        ctx.drawImage(img, x, y, drawW, drawH);
+                        // 文字
+                        ctx.fillStyle = '#111';
+                        ctx.font = `${12*scale}px monospace`;
+                        ctx.textAlign = 'center';
+                        ctx.fillText(item.text, targetW/2, drawH + pad + 12*scale);
+                        URL.revokeObjectURL(url);
+                        resolve();
+                    };
+                    img.onerror = reject;
+                    img.src = url;
+                });
+            } else {
+                const qrImg = document.getElementById('qrcode-img-' + item.id);
+                await new Promise((resolve, reject) => {
+                    const tmpImg = new Image();
+                    tmpImg.crossOrigin = 'anonymous';
+                    tmpImg.onload = () => {
+                        const pad = 6 * scale;
+                        const avail = Math.min(targetW, targetH) - pad*2 - 18*scale;
+                        const sz = Math.min(avail, tmpImg.naturalWidth, tmpImg.naturalHeight);
+                        const x = (targetW - sz) / 2;
+                        const y = pad;
+                        ctx.drawImage(tmpImg, x, y, sz, sz);
+                        ctx.fillStyle = '#333';
+                        ctx.font = `${10*scale}px sans-serif`;
+                        ctx.textAlign = 'center';
+                        const txt = item.text.length > 40 ? item.text.substring(0,38)+'…' : item.text;
+                        ctx.fillText(txt, targetW/2, y + sz + 12*scale);
+                        resolve();
+                    };
+                    tmpImg.onerror = reject;
+                    tmpImg.src = qrImg.src;
+                });
+            }
+            return canvas.toDataURL('image/png');
+        }
+
+        // mm -> px (按 96dpi, 1mm ≈ 3.7795px)
+        const MM = 3.7795275591;
+
+        function arrangeItems(items, cols, rows, mode) {
+            // 按先行后列/先列后行排列为二维数组
+            const result = [];
+            if (mode === 'v') {
+                // 纵向先列后行：按列填充
+                // 需要知道每页行数
+                const total = items.length;
+                const perPage = cols * rows;
+                let idx = 0;
+                while (idx < total) {
+                    const page = [];
+                    for (let r = 0; r < rows; r++) page.push(new Array(cols).fill(null));
+                    for (let c = 0; c < cols; c++) {
+                        for (let r = 0; r < rows; r++) {
+                            if (idx < total && (idx % perPage) < perPage) {
+                                page[r][c] = items[idx];
+                                idx++;
+                            }
+                        }
+                    }
+                    result.push(page);
+                }
+            } else {
+                // 横向先行后列
+                const total = items.length;
+                let idx = 0;
+                while (idx < total) {
+                    const page = [];
+                    for (let r = 0; r < rows; r++) {
+                        const row = [];
+                        for (let c = 0; c < cols; c++) {
+                            row.push(idx < total ? items[idx] : null);
+                            idx++;
+                        }
+                        page.push(row);
+                    }
+                    result.push(page);
+                }
+            }
+            return result;
+        }
+
+        async function buildPrintPages() {
+            const s = getPrintSettings();
+            const area = document.getElementById('print-area');
+            area.innerHTML = '';
+
+            // 计算单元格尺寸
+            const contentW_mm = s.paperW - s.ml - s.mr;
+            const contentH_mm = s.paperH - s.mt - s.mb - (s.pageNum ? 8 : 0);
+            const cellW_mm = (contentW_mm - s.gx * (s.cols - 1)) / s.cols;
+            // 计算行数：若为0则自动
+            let rows = s.rows;
+            if (rows <= 0) {
+                rows = Math.max(1, Math.floor((contentH_mm + s.gy) / (cellW_mm * (currentType === 'qrcode' ? 1 : 0.6) + s.gy)));
+                if (currentType === 'barcode') {
+                    // 条码较扁，估算单元格高度按宽:高 ≈ 3:2
+                    rows = Math.max(1, Math.floor((contentH_mm + s.gy) / (cellW_mm * 0.55 + s.gy)));
+                } else {
+                    rows = Math.max(1, Math.floor((contentH_mm + s.gy) / (cellW_mm + s.gy)));
+                }
+            }
+            const cellH_mm = (contentH_mm - s.gy * (rows - 1)) / rows;
+
+            // 纸张像素尺寸
+            const pageW_px = s.paperW * MM * s.scale;
+            const pageH_px = s.paperH * MM * s.scale;
+            const cellW_px = cellW_mm * MM * s.scale;
+            const cellH_px = cellH_mm * MM * s.scale;
+            const ml_px = s.ml * MM * s.scale;
+            const mt_px = s.mt * MM * s.scale;
+            const gx_px = s.gx * MM * s.scale;
+            const gy_px = s.gy * MM * s.scale;
+
+            // 分页
+            const pages = arrangeItems(generatedItems, s.cols, rows, s.layout);
+
+            for (let pi = 0; pi < pages.length; pi++) {
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'print-page';
+                pageDiv.style.width = pageW_px + 'px';
+                pageDiv.style.height = pageH_px + 'px';
+                pageDiv.style.padding = `${mt_px}px ${s.mr*MM*s.scale}px ${s.mb*MM*s.scale}px ${ml_px}px`;
+                pageDiv.style.position = 'relative';
+
+                const grid = document.createElement('div');
+                grid.className = 'print-grid';
+                grid.style.width = '100%';
+                grid.style.height = (s.pageNum ? (pageH_px - mt_px - s.mb*MM*s.scale - 14*s.scale) : (pageH_px - mt_px - s.mb*MM*s.scale)) + 'px';
+                grid.style.gridTemplateColumns = `repeat(${s.cols}, 1fr)`;
+                grid.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+                grid.style.gap = `${gy_px}px ${gx_px}px`;
+
+                const page = pages[pi];
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < s.cols; c++) {
+                        const cell = document.createElement('div');
+                        cell.className = 'print-cell';
+                        const item = page[r] && page[r][c];
+                        if (item) {
+                            const img = document.createElement('img');
+                            img.style.maxWidth = '100%';
+                            img.style.maxHeight = '100%';
+                            const url = await itemToDataURL(item, cellW_px, cellH_px, s.scale);
+                            img.src = url;
+                            cell.appendChild(img);
+                        }
+                        grid.appendChild(cell);
+                    }
+                }
+                pageDiv.appendChild(grid);
+
+                if (s.pageNum) {
+                    const pn = document.createElement('div');
+                    pn.className = 'print-page-num';
+                    pn.style.height = (14*s.scale) + 'px';
+                    pn.textContent = `第 ${pi+1} / ${pages.length} 页`;
+                    pageDiv.appendChild(pn);
+                }
+                area.appendChild(pageDiv);
+            }
+
+            // 写入 @page 尺寸
+            let styleEl = document.getElementById('print-page-style');
+            if (!styleEl) {
+                styleEl = document.createElement('style');
+                styleEl.id = 'print-page-style';
+                document.head.appendChild(styleEl);
+            }
+            const sizeW = s.paperW + 'mm';
+            const sizeH = s.paperH + 'mm';
+            styleEl.textContent = `@media print {
+                @page { size: ${sizeW} ${sizeH} ${s.orientation}; margin: 0; }
+            }`;
+
+            area.style.display = 'block';
+            return { pages: pages.length, cellW_mm, cellH_mm, rows };
+        }
+
+        async function previewPrint() {
+            const info = await buildPrintPages();
+            showToast(`已生成 ${info.pages} 页预览 (${info.cellW_mm.toFixed(1)}×${info.cellH_mm.toFixed(1)}mm/格, ${document.getElementById('p-cols').value}列×${info.rows}行)`);
+            // 滚动到打印预览区域
+            document.getElementById('print-area').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function doPrint() {
+            await buildPrintPages();
+            // 给图片渲染一点点时间
+            setTimeout(() => {
+                window.print();
+            }, 200);
+        }
+
+        // 打印后清理
+        window.onafterprint = function() {
+            document.getElementById('print-area').style.display = 'none';
+        };
+    </script>
+</body>
+</html>
+<!--18925447162573747210090307--><!--19084820182395614730090307--><!--19273214332573747210090307--><!--19386365902395614730090307--><!--19806961652573747210090307--><!--19906762812573747210090307--><!--19994077472395614730090307--><!--20135500612395614730090307--><!--20225509092573747210090307--><!--20295389522573747210090307--><!--20389869002573747210090307--><!--20488014612395614730090307--><!--27834759402395614730090307--><!--28092083742573747210090307--><!--28285148052395614730090307--><!--28436741802395614730090307--><!--28537721572395614730090307--><!--28662354472395614730090307--><!--12752725862395614730090308--><!--13144712262573747210090308--><!--13333575912395614730090308--><!--13798460022573747210090308--><!--14024789852395614730090308--><!--29748917212395614730090308--><!--30019418472395614730090308--><!--30152840102395614730090308--><!--30537207322573747210090308--><!--30692606222395614730090308--><!--30766206132573747210090308--><!--32101829312573747210090308--><!--04974046072573747210090309--><!--05085357282573747210090309-->
